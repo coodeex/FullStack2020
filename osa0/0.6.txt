@@ -1,0 +1,14 @@
+
+
+note over selain: 
+Kun lisätään uusi muistiinpano, niin selaimella käynnissä
+oleva javascript koodi luo ja lisää sen listaan. Sitten se piirtää
+ruudun sisällön, jonka jälkeen tapahtuu seuraavaa:
+end note
+
+selain->palvelin: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+palvelin-->selain: {"message":"note created"}
+
+
+
+
