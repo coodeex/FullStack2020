@@ -1,6 +1,27 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
+const Average = ({good, neutral, bad}) => {
+  return (
+    <p>average {(good - bad)/(good + neutral + bad)} </p>
+  )
+}
+
+const All = ({good, neutral, bad}) => {
+  return (
+  <p>all {good + neutral + bad}</p>
+  )
+}
+
+const Positive = ({good, neutral, bad}) => {
+  return (
+  <p>positive {good*100/(good + neutral + bad)} %</p>
+  )
+}
+
+
+
+
 const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
@@ -21,17 +42,16 @@ const App = () => {
   return (
     <div>
       <h1>give feedback</h1>
-      <div>
-        <button onClick={handleGoodClick}>good</button>
-        <button onClick={handleNeutralClick}>neutral</button>
-        <button onClick={handleBadClick}>bad</button>
-      </div>
-      <div>
-        <h1>statistics</h1>
-        <p>good {good}</p>
-        <p>neutral {neutral}</p>
-        <p>bad {bad}</p>
-      </div>
+      <button onClick={handleGoodClick}>good</button>
+      <button onClick={handleNeutralClick}>neutral</button>
+      <button onClick={handleBadClick}>bad</button>
+      <h1>statistics</h1>
+      <p>good {good}</p>
+      <p>neutral {neutral}</p>
+      <p>bad {bad}</p>
+      <All good={good} neutral={neutral} bad={bad}/>
+      <Average good={good} neutral={neutral} bad={bad}/>
+      <Positive good={good} neutral={neutral} bad={bad}/>
     </div>
   )
 }
@@ -39,36 +59,3 @@ const App = () => {
 ReactDOM.render(<App />, 
   document.getElementById('root')
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React from 'react';
-
-// import ReactDOM from 'react-dom';
-// import Heloust from './test';
-// import Hook from './test2';
-
-
-// const App = () => {
-//   const name='Jaakob'
-
-//   return (
-//     <div>
-//       <Heloust name={name}/>
-//       <Hook/>
-//     </div>
-//   )
-// }
-
-// ReactDOM.render(<App />, document.getElementById('root'))
