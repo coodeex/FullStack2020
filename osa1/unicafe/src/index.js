@@ -10,7 +10,6 @@ const StatisticLine = ({text, value, moreText}) => (
   </tr>
 )
 
-
 const Statistics = ({good, neutral, bad}) => {
   const all = good + neutral + bad
   const average = (good - bad)/(good + neutral + bad)
