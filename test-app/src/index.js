@@ -2,55 +2,75 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 
-const App = (props) => {
-  const [messages, setMessages] = useState([
-    {id: 1, text: "thervist", name: "jaakob"}, 
-    {id: 2, text: "moro", name: "böri"} 
-  ])
-  const [newName, setNewName] = useState('')
-  const [newMessage, setNewMessage] = useState('')
 
-  const addMessage = (event) => {
-    event.preventDefault()
-    const messageObject = {
-      id: messages.length + 1,
-      text: newMessage,
-      name: newName
-    }
-    setMessages(messages.concat(messageObject))
-    setNewMessage('')
-  }
+const App = () => {
+  //let offset = new Date().getTimezoneOffset();
+  // console.log(offset)
+  //let date = new Date()
+  // console.log(date.getHours())
 
-  const handleMessageChange = (event) => setNewMessage(event.target.value)
-  const handleNameChange = (event) => setNewName(event.target.value)
+  console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
+  console.log(Intl.DateTimeFormat().resolvedOptions().numberingSystem)
 
-  return (
-    <div>
-      <h1>Super Chat</h1>
-      <form onSubmit={addMessage}>
-        <div>username:
-          <input 
-            value={newName}
-            onChange={handleNameChange}
-          />
-        </div>
-        <div>message:
-          <input
-            value={newMessage}
-            onChange={handleMessageChange}
-          />
-          <button type="submit">send</button>
-        </div>
-      </form>
 
-      <ul>
-        {messages.map(message=>
-          <li key={message.id}>{message.name}: {message.text}</li>  
-        )}
-      </ul>
-    </div>
+
+  return(
+    <div>tekstiä</div>
   )
 }
+
+
+
+
+// const App = (props) => {
+//   const [messages, setMessages] = useState([
+//     {id: 1, text: "thervist", name: "jaakob"}, 
+//     {id: 2, text: "moro", name: "juha"} 
+//   ])
+//   const [newName, setNewName] = useState('')
+//   const [newMessage, setNewMessage] = useState('')
+
+//   const addMessage = (event) => {
+//     event.preventDefault()
+//     const messageObject = {
+//       id: messages.length + 1,
+//       text: newMessage,
+//       name: newName
+//     }
+//     setMessages(messages.concat(messageObject))
+//     setNewMessage('')
+//   }
+
+//   const handleMessageChange = (event) => setNewMessage(event.target.value)
+//   const handleNameChange = (event) => setNewName(event.target.value)
+
+//   return (
+//     <div>
+//       <h1>Super Chat</h1>
+//       <form onSubmit={addMessage}>
+//         <div>username:
+//           <input 
+//             value={newName}
+//             onChange={handleNameChange}
+//           />
+//         </div>
+//         <div>message:
+//           <input
+//             value={newMessage}
+//             onChange={handleMessageChange}
+//           />
+//           <button type="submit">send</button>
+//         </div>
+//       </form>
+
+//       <ul>
+//         {messages.map(message=>
+//           <li key={message.id}>{message.name}: {message.text}</li>  
+//         )}
+//       </ul>
+//     </div>
+//   )
+// }
 
 
 
