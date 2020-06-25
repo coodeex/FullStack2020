@@ -86,7 +86,7 @@ const App = () => {
         setPersons(response.data)
       })
       .catch(error => console.log(error))
-  }, [persons])
+  }, [messageColor])
 
   const addName = (event) => {
     event.preventDefault()
