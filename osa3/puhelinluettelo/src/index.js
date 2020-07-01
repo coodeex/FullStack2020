@@ -86,7 +86,7 @@ const App = () => {
         setPersons(response.data)
       })
       .catch(error => console.log(error))
-  }, [messageColor]) // tässä oli persons joka aiheutti infinite request loopin
+  }, [messageColor])
 
   const addName = (event) => {
     event.preventDefault()
@@ -102,10 +102,16 @@ const App = () => {
       }
       personService
         .create(personObject)
-        .then(response => {
+        .then(() => {
           setPersons(persons.concat(personObject))
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+          setMessageColor('red')
+          setMessage(error.response.data.error)
+          setTimeout(() => {
+            setMessage(null)
+          }, 4000)
+        })
       setMessageColor('green')
       setMessage(`Added ${newName}`)
       setTimeout(() => {
@@ -126,8 +132,13 @@ const App = () => {
         setPersons(persons.map(p => p.id !== person.id ? p : response.data))
       })
       .catch(error => {
+        console.log(error.response)
         setMessageColor('red')
-        setMessage(`Information of ${changedPerson.name} has already removed from server`)
+        if (error.response.status === 400) {
+          setMessage(error.response.data.error)
+        }else{
+          setMessage(`Information of ${changedPerson.name} has already removed from server`)
+        }
         setTimeout(() => {
           setMessage(null)
         }, 4000)
@@ -146,10 +157,16 @@ const App = () => {
     if (window.confirm(`Delete ${person.name}?`)) {
       personService
         .deletePerson(person.id)
-        .then(response => {
+        .then(() => {
           setPersons(persons.filter(p => p.name !== person.name))
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+          setMessageColor('red')
+          setMessage(`Too fast! Error occured while deleting ${person.name}`)
+          setTimeout(() => {
+            setMessage(null)
+          }, 4000)
+        })
       setMessageColor('green')
       setMessage(`Deleted ${person.name}`)
       setTimeout(() => {
