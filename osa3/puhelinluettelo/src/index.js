@@ -180,7 +180,6 @@ const App = () => {
       <h2>Phonebook</h2>
       <Message message={message} colour={messageColor} />
       <Filter value={newFilter} onChange={handleFilterChange} />
-      <button type="submit" onClick={() => console.log(persons)}>log persons</button>
       <h3>add a new</h3>
       <PersonForm
         addName={addName}
