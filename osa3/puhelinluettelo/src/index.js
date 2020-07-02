@@ -86,16 +86,17 @@ const App = () => {
         setPersons(response.data)
       })
       .catch(error => console.log(error))
-  }, [messageColor])
+  }, [message])
 
   const addName = (event) => {
     event.preventDefault()
 
     if (persons.some(person => person.name === newName)) {
-      if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
-        handleNumberUpdate(newName)
+      const person = persons.find(p => p.name===newName)
+      if (window.confirm(`${person.name} is already added to phonebook, replace the old number with a new one?`)) {
+        handleNumberUpdate(person)
       }
-    } else {
+    }else {
       const personObject = {
         name: newName,
         number: newNumber
@@ -122,8 +123,7 @@ const App = () => {
     setNewNumber('')
   }
 
-  const handleNumberUpdate = name => {
-    const person = persons.find(p => p.name === name)
+  const handleNumberUpdate = (person) => {
     const changedPerson = { ...person, number: newNumber }
 
     personService
@@ -180,6 +180,7 @@ const App = () => {
       <h2>Phonebook</h2>
       <Message message={message} colour={messageColor} />
       <Filter value={newFilter} onChange={handleFilterChange} />
+      <button type="submit" onClick={() => console.log(persons)}>log persons</button>
       <h3>add a new</h3>
       <PersonForm
         addName={addName}
