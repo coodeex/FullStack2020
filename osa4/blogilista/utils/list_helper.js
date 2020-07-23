@@ -41,12 +41,9 @@ const mostBlogs = (blogs) => {
   .entries()
   .maxBy(_.last));
 
-  let num = 0
-  for(i=0;i<result.length;i++){
-    if(result[i]===res)num++;
-  }
-  
-  return {author: res, blogs: num}
+  let sum = result.reduce((acc, blog) => blog===res ? acc + 1 : acc, 0)
+
+  return {author: res, blogs: sum}
 }
 
 const mostLikes = (blogs) => {
