@@ -37,21 +37,21 @@ const mostBlogs = (blogs) => {
     .map(blog => (blog.author)).value();
 
   let res = _.head(_(result)
-  .countBy()
-  .entries()
-  .maxBy(_.last));
+    .countBy()
+    .entries()
+    .maxBy(_.last));
 
-  let sum = result.reduce((acc, blog) => blog===res ? acc + 1 : acc, 0)
+  let sum = result.reduce((acc, blog) => blog === res ? acc + 1 : acc, 0)
 
-  return {author: res, blogs: sum}
+  return { author: res, blogs: sum }
 }
 
 const mostLikes = (blogs) => {
   let res = _.chain(blogs)
-  .groupBy('author')
-  .map((group, author) => ({ author, likes: _.sumBy(group, 'likes') }))
-  .maxBy('likes')
-  .value();
+    .groupBy('author')
+    .map((group, author) => ({ author, likes: _.sumBy(group, 'likes') }))
+    .maxBy('likes')
+    .value();
   return res
 }
 
