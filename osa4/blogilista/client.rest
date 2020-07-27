@@ -9,5 +9,35 @@ content-type: application/json
     "title": "Kesämuistoja",
     "author": "Kesä Esa",
     "url": "https://www.google.com/search?q=summer",
-    "likes": 8
+    "likes": 8,
+    "userId": "5f1eef58278fad17503a9aa5"
 }
+
+###
+
+POST http://localhost:3003/api/blogs
+content-type: application/json
+
+{
+    "title": "jotain myyta",
+    "author": "talvea",
+    "url": "https://www.google.com/search?q=winter",
+    "likes": 8,
+    "userId": "5f1eef58278fad17503a9aa5"
+}
+
+###
+
+DELETE http://localhost:3003/api/blogs/5f1e855cccb01931348dee8d
+
+###
+
+POST http://localhost:3003/api/users
+content-type: application/json
+
+{
+    "username": "juhax",
+    "name": "Juuhan Lehti",
+    "password": "salaisuus"
+}
+
