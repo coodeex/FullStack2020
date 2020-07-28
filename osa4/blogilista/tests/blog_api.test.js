@@ -4,22 +4,38 @@ const app = require('../app')
 
 const api = supertest(app)
 const Blog = require('../models/blog')
+const User = require('../models/user')
+
 
 const initialBlogs = [{
   title: "First Post",
   author: "person",
   url: "https://www.google.com/",
-  likes: 5
+  likes: 5,
+  userId: "5f1eef58278fad17503a9aa5"
 },
 {
   title: "Kesämuistoja",
   author: "Kesä Esa",
   url: "https://www.google.com/search?q=summer",
-  likes: 8
+  likes: 8,
+  userId: "5f1eef58278fad17503a9aa5"
+
 }]
 
 beforeEach(async () => {
   await Blog.deleteMany({})
+  await User.deleteMany({})
+
+  const newUser = {
+    username: 'juhax',
+    name: 'Juuhan Lehti',
+    password: 'salaisuus',
+  }
+
+  await api
+    .post('/api/users')
+    .send(newUser)
 
   let blogObject = new Blog(initialBlogs[0])
   await blogObject.save()

@@ -10,7 +10,7 @@ content-type: application/json
     "author": "Kesä Esa",
     "url": "https://www.google.com/search?q=summer",
     "likes": 8,
-    "userId": "5f1eef58278fad17503a9aa5"
+    "userId": "5f1ff04146f5013e88844fcf"
 }
 
 ###
@@ -23,7 +23,7 @@ content-type: application/json
     "author": "talvea",
     "url": "https://www.google.com/search?q=winter",
     "likes": 8,
-    "userId": "5f1eef58278fad17503a9aa5"
+    "userId": "5f1ff04146f5013e88844fcf"
 }
 
 ###
@@ -40,4 +40,15 @@ content-type: application/json
     "name": "Juuhan Lehti",
     "password": "salaisuus"
 }
+
+###
+
+POST http://localhost:3003/api/login
+content-type: application/json
+
+{
+    "username": "juhax",
+    "password": "salaisuus"
+}
+
 
