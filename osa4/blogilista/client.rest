@@ -10,7 +10,7 @@ content-type: application/json
     "author": "Kesä Esa",
     "url": "https://www.google.com/search?q=summer",
     "likes": 8,
-    "userId": "5f1ff04146f5013e88844fcf"
+    "userId": "5f1ff41570350c0bc0f0c3e0"
 }
 
 ###
@@ -23,12 +23,15 @@ content-type: application/json
     "author": "talvea",
     "url": "https://www.google.com/search?q=winter",
     "likes": 8,
-    "userId": "5f1ff04146f5013e88844fcf"
+    "userId": "5f1ff6f611257b37e4395157"
 }
 
 ###
 
-DELETE http://localhost:3003/api/blogs/5f1e855cccb01931348dee8d
+DELETE http://localhost:3003/api/blogs/5f213a9e0e45f641ac6bf45f
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imp1aGF4aXMiLCJpZCI6IjVmMjEyOTlkOGI1ZmI5MzUzMDRhZmRhYSIsImlhdCI6MTU5NjAxMjc0Nn0.i9LMEKxoRp7mzcs3KKWqkvfDJ1YDBhEFEWoO07splKc
+
+
 
 ###
 
@@ -36,7 +39,7 @@ POST http://localhost:3003/api/users
 content-type: application/json
 
 {
-    "username": "juhax",
+    "username": "juhaxis",
     "name": "Juuhan Lehti",
     "password": "salaisuus"
 }
@@ -47,8 +50,22 @@ POST http://localhost:3003/api/login
 content-type: application/json
 
 {
-    "username": "juhax",
+    "username": "juhaxis",
     "password": "salaisuus"
+}
+
+###
+
+POST http://localhost:3003/api/blogs
+content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imp1aGF4aXMiLCJpZCI6IjVmMjE2MzU5NThlMDgwMzkyNDA0OWJjMiIsImlhdCI6MTU5NjAyMzY0OH0.fh3UWFRC2FPTDwcTW4UH3vAmUUodpU__hXHTHRcJbJE
+
+{
+    "title": "jotain mystuta",
+    "author": "talvea",
+    "url": "https://www.google.com/search?q=winter",
+    "likes": 78,
+    "userId": "5f21635958e0803924049bc2"
 }
 
 

@@ -22,6 +22,7 @@ const initialBlogs = [{
   userId: "5f1eef58278fad17503a9aa5"
 
 }]
+let exampleUser = {}
 
 beforeEach(async () => {
   await Blog.deleteMany({})
@@ -33,7 +34,7 @@ beforeEach(async () => {
     password: 'salaisuus',
   }
 
-  await api
+  exampleUser = await api
     .post('/api/users')
     .send(newUser)
 
@@ -42,6 +43,8 @@ beforeEach(async () => {
 
   blogObject = new Blog(initialBlogs[1])
   await blogObject.save()
+
+  console.log("User", exampleUser.body)
 })
 
 test('blogs are returned as json', async () => {
@@ -53,7 +56,7 @@ test('blogs are returned as json', async () => {
 
 test('of number of blogs is right', async () => {
   const response = await api.get('/api/blogs')
-  expect(response.body).toHaveLength(2)
+  expect(response.body).toHaveLength(initialBlogs.length)
 })
 
 test('blog identifier is id', async () => {
@@ -67,7 +70,8 @@ test('blogs length', async () => {
     title: 'asynchronous',
     author: '4.10',
     url: 'https://www.google.com/search?q=asyncawait',
-    likes: 4
+    likes: 4,
+    userId: "5f1eef58278fad17503a9aa5"
   }
 
   await api
