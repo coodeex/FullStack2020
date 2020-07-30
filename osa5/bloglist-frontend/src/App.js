@@ -3,7 +3,27 @@ import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
+const Message = ({ message, colour }) => {
+  const addedStyle = {
+    color: colour,
+    background: 'lightgrey',
+    fontSize: 20,
+    borderStyle: 'solid',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10
+  }
 
+  if (message === null) {
+    return null
+  }
+
+  return (
+    <div style={addedStyle}>
+      {message}
+    </div>
+  )
+}
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -14,6 +34,8 @@ const App = () => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
+  const [message, setMessage] = useState(null)
+  const [messageColor, setMessageColor] = useState()
 
 
   useEffect(() => {
@@ -45,6 +67,13 @@ const App = () => {
       .then(returnedBlog => {
         setBlogs(blogs.concat(returnedBlog))
       })
+      .catch(error => console.log(error))
+
+    setMessageColor('green')
+    setMessage(`a new blog ${title} by ${author} added`)
+    setTimeout(() => {
+      setMessage(null)
+    }, 4000)
   }
 
   const handleLogin = async (event) => {
@@ -63,10 +92,11 @@ const App = () => {
       setUsername('')
       setPassword('')
     } catch (exception) {
-      setErrorMessage('wrong credentials')
+      setMessageColor('red')
+      setMessage(`wrong username or password`)
       setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000)
+        setMessage(null)
+      }, 4000)
     }
     console.log(window.localStorage)
   }
@@ -140,14 +170,15 @@ const App = () => {
         <div>
           {blogs.map(blog =>
             <Blog key={blog.id} blog={blog} />
-          )}
+            )}
         </div>
       </>
     )
   }
-
+  
   return (
     <div>
+      <Message message={message} colour={messageColor} />
       {user === null
         ? loginForm()
         : blogForm()
