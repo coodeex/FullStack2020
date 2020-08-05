@@ -15,12 +15,6 @@ const BlogForm = ({ createBlog }) => {
     }
 
     createBlog(blogObject)
-
-    // setMessageColor('green')
-    // setMessage(`a new blog ${title} by ${author} added`)
-    // setTimeout(() => {
-    //   setMessage(null)
-    // }, 4000)
   }
 
 

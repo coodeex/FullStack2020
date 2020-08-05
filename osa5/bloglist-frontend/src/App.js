@@ -31,9 +31,6 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  // const [title, setTitle] = useState('')
-  // const [author, setAuthor] = useState('')
-  // const [url, setUrl] = useState('')
   const [message, setMessage] = useState(null)
   const [messageColor, setMessageColor] = useState()
   const [newBlog, setNewBlog] = useState(null)
@@ -55,13 +52,6 @@ const App = () => {
   }, [])
 
   const addBlog = (blogObject) => {
-    // event.preventDefault()
-
-    // const blogObject = {
-    //   title: title,
-    //   author: author,
-    //   url: url
-    // }
 
     blogService
       .create(blogObject)
@@ -77,6 +67,18 @@ const App = () => {
     setTimeout(() => {
       setMessage(null)
     }, 4000)
+  }
+
+  const likeBlog = (iidee, blog) => {
+    console.log("iidee", iidee)
+    console.log("blog", blog)
+    blogService
+      .update(iidee, blog)
+      .then(response => {
+        console.log("response", response)
+        setBlogs(blogs.map(b => b.id !== iidee ? b : response))
+      })
+      .catch(error => console.log(error))
   }
 
   const handleLogin = async (event) => {
@@ -148,14 +150,15 @@ const App = () => {
       <br /><br />
       {newBlog !== null
         ? <>
-          <BlogForm createBlog={addBlog} setMessage={()=>setMessage} setMessageColor={()=>setMessageColor}/>
+          <BlogForm createBlog={addBlog} />
           <button onClick={() => createNewBlog(null)}>cancel</button>
         </>
         : <button onClick={() => createNewBlog(1)}>new Blog</button>
       }
       <div>
-        {blogs.map(blog =>
-          <Blog key={blog.id} blog={blog} />
+        {/* {blogs.forEach(b=>console.log(b))} */}
+        {blogs.map(blog => 
+          <Blog key={blog.id} blog={blog} likeBlog={likeBlog}/>
         )}
       </div>
     </>
