@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
+import BlogForm from './components/BlogForm'
 
 const Message = ({ message, colour }) => {
   const addedStyle = {
@@ -30,12 +31,12 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [errorMessage, setErrorMessage] = useState(null)
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
+  // const [title, setTitle] = useState('')
+  // const [author, setAuthor] = useState('')
+  // const [url, setUrl] = useState('')
   const [message, setMessage] = useState(null)
   const [messageColor, setMessageColor] = useState()
+  const [newBlog, setNewBlog] = useState(null)
 
 
   useEffect(() => {
@@ -53,14 +54,14 @@ const App = () => {
     }
   }, [])
 
-  const addBlog = (event) => {
-    event.preventDefault()
+  const addBlog = (blogObject) => {
+    // event.preventDefault()
 
-    const blogObject = {
-      title: title,
-      author: author,
-      url: url
-    }
+    // const blogObject = {
+    //   title: title,
+    //   author: author,
+    //   url: url
+    // }
 
     blogService
       .create(blogObject)
@@ -69,8 +70,10 @@ const App = () => {
       })
       .catch(error => console.log(error))
 
+    setNewBlog(null)
+
     setMessageColor('green')
-    setMessage(`a new blog ${title} by ${author} added`)
+    setMessage(`a new blog ${blogObject.title} by ${blogObject.author} added`)
     setTimeout(() => {
       setMessage(null)
     }, 4000)
@@ -133,55 +136,38 @@ const App = () => {
     window.localStorage.removeItem('loggedBlogappUser')
   }
 
-  const blogForm = () => {
-    return (
-      <>
-        <h2>blogs</h2>
-        {user.name} logged in
-        <button onClick={logout}>logout</button>
-        <br /><br />
-        <h2>create new</h2>
-        <form onSubmit={addBlog}>
-          <div>
-            title:
-          <input
-              type="text"
-              value={title}
-              name="Title"
-              onChange={({ target }) => setTitle(target.value)}
-            /><br></br>
-            author:
-          <input
-              type="text"
-              value={author}
-              name="Author"
-              onChange={({ target }) => setAuthor(target.value)}
-            /><br></br>
-            url:
-          <input
-              type="text"
-              value={url}
-              name="Url"
-              onChange={({ target }) => setUrl(target.value)}
-            />
-          </div>
-          <button type="submit">create</button>
-        </form>
-        <div>
-          {blogs.map(blog =>
-            <Blog key={blog.id} blog={blog} />
-            )}
-        </div>
-      </>
-    )
+  const createNewBlog = (value) => {
+    setNewBlog(value)
   }
-  
+
+  const blogPage = () => (
+    <>
+      <h2>blogs</h2>
+      {user.name} logged in
+      <button onClick={logout}>logout</button>
+      <br /><br />
+      {newBlog !== null
+        ? <>
+          <BlogForm createBlog={addBlog} setMessage={()=>setMessage} setMessageColor={()=>setMessageColor}/>
+          <button onClick={() => createNewBlog(null)}>cancel</button>
+        </>
+        : <button onClick={() => createNewBlog(1)}>new Blog</button>
+      }
+      <div>
+        {blogs.map(blog =>
+          <Blog key={blog.id} blog={blog} />
+        )}
+      </div>
+    </>
+  )
+
   return (
     <div>
       <Message message={message} colour={messageColor} />
       {user === null
         ? loginForm()
-        : blogForm()
+        : blogPage()
+
       }
     </div>
   )
