@@ -27,10 +27,9 @@ const Blog = ({ blog, likeBlog, deleteBlog}) => {
 
   const handleRemove = (event) => {
     event.preventDefault()
-
-
-    console.log("handleremove")
-    deleteBlog(blog.id)
+    if(window.confirm(`Remove blog ${blog.title} by ${blog.author}`)){
+      deleteBlog(blog.id)
+    }
   }
   
 

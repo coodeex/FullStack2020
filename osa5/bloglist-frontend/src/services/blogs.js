@@ -32,7 +32,6 @@ const remove = async id => {
   }
 
   const request = axios.delete(`${baseUrl}/${id}`, config)
-  console.log(request.then(response => response.data))
   return request.then(response => response.data)
 }
 

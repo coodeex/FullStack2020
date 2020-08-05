@@ -109,7 +109,6 @@ const App = () => {
         setMessage(null)
       }, 4000)
     }
-    console.log(window.localStorage)
   }
 
   const loginForm = () => (
