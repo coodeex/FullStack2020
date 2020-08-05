@@ -69,14 +69,20 @@ const App = () => {
     }, 4000)
   }
 
-  const likeBlog = (iidee, blog) => {
-    console.log("iidee", iidee)
-    console.log("blog", blog)
+  const likeBlog = (blog) => {
     blogService
-      .update(iidee, blog)
+      .update(blog.id, blog)
       .then(response => {
-        console.log("response", response)
-        setBlogs(blogs.map(b => b.id !== iidee ? b : response))
+        setBlogs(blogs.map(b => b.id !== blog.id ? b : response))
+      })
+      .catch(error => console.log(error))
+  }
+
+  const deleteBlog = (id) => {
+    blogService
+      .remove(id)
+      .then(() => {
+        setBlogs(blogs.filter(b => b.id !== id))
       })
       .catch(error => console.log(error))
   }
@@ -157,8 +163,8 @@ const App = () => {
       }
       <div>
         {/* {blogs.forEach(b=>console.log(b))} */}
-        {blogs.map(blog => 
-          <Blog key={blog.id} blog={blog} likeBlog={likeBlog}/>
+        {blogs.sort((a,b) => -(a.likes-b.likes)).map(blog => 
+          <Blog key={blog.id} blog={blog} likeBlog={likeBlog} deleteBlog={deleteBlog}/>
         )}
       </div>
     </>
