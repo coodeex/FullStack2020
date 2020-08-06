@@ -104,7 +104,7 @@ const App = () => {
       setPassword('')
     } catch (exception) {
       setMessageColor('red')
-      setMessage(`wrong username or password`)
+      setMessage('wrong username or password')
       setTimeout(() => {
         setMessage(null)
       }, 4000)
@@ -161,9 +161,8 @@ const App = () => {
         : <button onClick={() => createNewBlog(1)}>new Blog</button>
       }
       <div>
-        {/* {blogs.forEach(b=>console.log(b))} */}
-        {blogs.sort((a,b) => -(a.likes-b.likes)).map(blog => 
-          <Blog key={blog.id} blog={blog} likeBlog={likeBlog} deleteBlog={deleteBlog}/>
+        {blogs.sort((a, b) => -(a.likes - b.likes)).map(blog =>
+          <Blog key={blog.id} blog={blog} likeBlog={likeBlog} deleteBlog={deleteBlog} username={user.name} />
         )}
       </div>
     </>
