@@ -28,23 +28,33 @@ beforeEach(async () => {
   await Blog.deleteMany({})
   await User.deleteMany({})
 
-  const newUser = {
+  const newUser1 = {
     username: 'juhax',
     name: 'Juuhan Lehti',
     password: 'salaisuus',
   }
 
-  exampleUser = await api
+  exampleUser1 = await api
     .post('/api/users')
-    .send(newUser)
+    .send(newUser1)
 
-  let blogObject = new Blog(initialBlogs[0])
-  await blogObject.save()
+    const newUser2 = {
+      username: 'juhaxis',
+      name: 'Juan Lelo',
+      password: 'salaisuus',
+    }
+  
+    exampleUser2 = await api
+      .post('/api/users')
+      .send(newUser2)
 
-  blogObject = new Blog(initialBlogs[1])
-  await blogObject.save()
+  // let blogObject = new Blog(initialBlogs[0])
+  // await blogObject.save()
 
-  console.log("User", exampleUser.body)
+  // blogObject = new Blog(initialBlogs[1])
+  // await blogObject.save()
+
+  // console.log("User", exampleUser.body)
 })
 
 test('blogs are returned as json', async () => {

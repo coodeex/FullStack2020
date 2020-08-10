@@ -39,11 +39,11 @@ const Blog = ({ blog, likeBlog, deleteBlog, username }) => {
     <div style={blogStyle}>
       {visible === null
         ? <>
-          {blog.title}
+          {blog.title} {blog.author}
           <button onClick={() => setVisible(1)}>view</button>
         </>
         : <>
-          {blog.title}
+          {blog.title} {blog.author}
           <button onClick={() => setVisible(null)}>hide</button>
           <br></br>
           {blog.url}
@@ -51,8 +51,9 @@ const Blog = ({ blog, likeBlog, deleteBlog, username }) => {
           {blog.likes}
           <button onClick={handleLike}>like</button>
           <br></br>
-          {blog.author}
-          {username === blog.author
+          {/* {blog.author}  */}
+          {blog.creator}
+          {username === blog.creator
             ? <>
               <br></br>
               <button onClick={handleRemove}>remove</button>
