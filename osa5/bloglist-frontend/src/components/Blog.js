@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 
 const Blog = ({ blog, likeBlog, deleteBlog, username }) => {
+  // const [visible, setVisible] = useState(null)
   const [visible, setVisible] = useState(null)
 
   const blogStyle = {
@@ -34,17 +35,18 @@ const Blog = ({ blog, likeBlog, deleteBlog, username }) => {
     }
   }
 
+  const toggleVisibility = () => visible ? setVisible(null) : setVisible(1)
 
   return (
     <div style={blogStyle}>
       {visible === null
         ? <>
           {blog.title} {blog.author}
-          <button onClick={() => setVisible(1)}>view</button>
+          <button onClick={() => toggleVisibility()}>view</button>
         </>
         : <>
           {blog.title} {blog.author}
-          <button onClick={() => setVisible(null)}>hide</button>
+          <button onClick={() => toggleVisibility()}>hide</button>
           <br></br>
           {blog.url}
           <br></br>
