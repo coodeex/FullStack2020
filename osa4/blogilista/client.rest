@@ -68,4 +68,6 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imp1a
     "userId": "5f21635958e0803924049bc2"
 }
 
+###
 
+POST http://localhost:3003/api/testing/reset 
