@@ -20,7 +20,13 @@ const Message = ({ message, colour }) => {
   }
 
   return (
+    colour === 'green'
+    ?
     <div style={addedStyle}>
+      {message}
+    </div>
+    :
+    <div className="error" style={addedStyle}>
       {message}
     </div>
   )
@@ -120,7 +126,7 @@ const App = () => {
           <input
             type="text"
             value={username}
-            name="Username"
+            id="Username"
             onChange={({ target }) => setUsername(target.value)}
           />
         </div>
@@ -129,11 +135,11 @@ const App = () => {
           <input
             type="password"
             value={password}
-            name="Password"
+            id="Password"
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-        <button type="submit">login</button>
+        <button id="login-button" type="submit">login</button>
       </form>
     </>
   )

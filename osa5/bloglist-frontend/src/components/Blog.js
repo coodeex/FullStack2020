@@ -42,7 +42,7 @@ const Blog = ({ blog, likeBlog, deleteBlog, username }) => {
       {visible === null
         ? <>
           {blog.title} {blog.author}
-          <button onClick={() => toggleVisibility()}>view</button>
+          <button id="View" onClick={() => toggleVisibility()}>view</button>
         </>
         : <>
           {blog.title} {blog.author}
@@ -51,7 +51,7 @@ const Blog = ({ blog, likeBlog, deleteBlog, username }) => {
           {blog.url}
           <br></br>
           {blog.likes}
-          <button onClick={handleLike}>like</button>
+          <button id="Like" onClick={handleLike}>like</button>
           <br></br>
           {/* {blog.author}  */}
           {blog.creator}
