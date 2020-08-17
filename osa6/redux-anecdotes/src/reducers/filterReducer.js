@@ -10,7 +10,6 @@ const filterReducer = (state = initFilter, action) => {
 }
 
 export const filterText = text => {
-  console.log("reducer teksti", text)
   
   return {
     type: 'FILTER_TEXT',
